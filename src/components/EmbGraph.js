@@ -2,19 +2,18 @@ import React from 'react';
 import Filter from "./Filter"
 import AlertPanel from './AlertPanel';
 import Container from 'react-bootstrap/Container';
+import * as CONSTANTS from "../constants"
 
 class EmbGraph extends React.Component {
 
     constructor(props) {
         super(props)
-        this.baseUrl = "https://covid-svc.herokuapp.com/"
-        //this.baseUrl = "http://127.0.0.1:8000/"
         this.state = {
             link: "Hello",
             graphHtml: "",
             message: "",
             messageType: "",
-            url: this.baseUrl + "embgraph/?infoType=deaths&logScale=true&byPop=false&countries=Spain,%20France,%20Italy,%20US,%20Denmark,%20Sweden,%20Canada,%20Australia,%20Germany,%20Poland,%20India,%20China,%20United%20Kingdom"
+            url: CONSTANTS.BASE_URL + "embgraph/?infoType=deaths&logScale=true&byPop=false&countries=Spain,%20France,%20Italy,%20US,%20Denmark,%20Sweden,%20Canada,%20Australia,%20Germany,%20Poland,%20India,%20China,%20United%20Kingdom"
         }
     }
 

@@ -9,12 +9,11 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Form from 'react-bootstrap/Form';
 import { Multiselect } from 'multiselect-react-dropdown';
+import * as CONSTANTS from "../constants"
 
 class Filter extends React.Component {
     constructor(props) {
         super(props)
-        this.baseUrl = "https://covid-svc.herokuapp.com/"
-        //this.baseUrl = "http://127.0.0.1:8000/"
         this.setParentState = this.props.setParentState
         this.callback = this.props.callback
         this.countries = React.createRef();
@@ -28,7 +27,7 @@ class Filter extends React.Component {
     }
 
     FetchCountries = () => {
-        fetch(this.baseUrl + "countries/")
+        fetch(CONSTANTS.BASE_URL + "countries/")
             .then(res => res.json())
             .then((data) => {
                 var countries = data.countries.replace("[", "").replace("]", "").replace(/["']/g, "").split(",")
@@ -48,7 +47,7 @@ class Filter extends React.Component {
         var selectedCountries = this.countries.current.getSelectedItems()
         params += "&countries="
         params += selectedCountries.toString();
-        var urlWithParams = this.baseUrl + "embgraph/?" + encodeURI(params)
+        var urlWithParams = CONSTANTS.BASE_URL + "embgraph/?" + encodeURI(params)
         this.setParentState({ url: urlWithParams, message: "Loading graph...", messageType: "info" })
     }
 
@@ -81,7 +80,7 @@ class Filter extends React.Component {
                             &nbsp;&nbsp;&nbsp;
                             <InputGroup.Text>Countries</InputGroup.Text>
                             <Multiselect
-                                style={{ searchBox: { backgroundColor: "#FFFFFF", width: "950px" } }}
+                                style={{ searchBox: { backgroundColor: "#FFFFFF" } }}
                                 isObject={false}
                                 ref={this.countries}
                                 options={this.state.countryList}
@@ -92,27 +91,25 @@ class Filter extends React.Component {
                     </Form.Group>
                     <Form.Group as={Row} controlId="formHorizontalGraphParams">
                         <Col lg="4">
-                            <ButtonGroup className="mb-2">
-                                <ToggleButtonGroup id="infoTypeRadio" type="radio" name="infoTypeRadio" defaultValue={2} onChange={this.OnInfoTypeChange}>
-                                    <ToggleButton variant="outline-secondary" value={1}>Confirmed</ToggleButton>
-                                    <ToggleButton variant="outline-secondary" value={2}>Deaths</ToggleButton>
-                                    <ToggleButton variant="outline-secondary" value={3}>Recovered</ToggleButton>
-                                </ToggleButtonGroup>
-                            </ButtonGroup>
+                            <ToggleButtonGroup id="infoTypeRadio" className="mb-2" type="radio" name="infoTypeRadio" defaultValue={2} onChange={this.OnInfoTypeChange}>
+                                <ToggleButton variant="outline-secondary" value={1}>Confirmed</ToggleButton>
+                                <ToggleButton variant="outline-secondary" value={2}>Deaths</ToggleButton>
+                                <ToggleButton variant="outline-secondary" value={3}>Recovered</ToggleButton>
+                            </ToggleButtonGroup>
                         </Col>
                         <Col lg="5">
-                            <ToggleButtonGroup id="addParamsCheckbox" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange}>
+                            <ToggleButtonGroup id="addParamsCheckbox" className="mb-2" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange}>
                                 <ToggleButton variant="outline-secondary" value={1}>Log Scale</ToggleButton>
                                 <ToggleButton variant="outline-secondary" value={2}>By Population (in million)</ToggleButton>
                             </ToggleButtonGroup>
                         </Col>
-                        <Col lg="auto">
-                            <Button type="reset" variant="outline-primary">Reset Countries</Button>&nbsp;
+                        <Col lg="3">
+                            <Button type="reset" variant="outline-primary" style={{ marginRight: "15px" }}>Reset Countries</Button>
                             <Button type="button" variant="primary" onClick={this.HandleReload}>Reload</Button>
                         </Col>
                     </Form.Group>
                 </Alert>
-            </Form>
+            </Form >
         );
     }
 }
