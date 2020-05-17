@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Container from 'react-bootstrap/Container';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Form from 'react-bootstrap/Form';
@@ -72,44 +73,45 @@ class Filter extends React.Component {
 
     render() {
         return (
-            //this.HandleReload();
-            <Form onSubmit={e => { e.preventDefault(); }}>
-                <Alert variant="secondary">
-                    <Form.Group as={Row} controlId="formHorizontalCountries">
-                        <InputGroup.Prepend>
-                            &nbsp;&nbsp;&nbsp;
+            <Container fluid>
+                <Form onSubmit={e => { e.preventDefault(); }}>
+                    <Alert variant="secondary">
+                        <Form.Group as={Row} controlId="formHorizontalCountries">
+                            <InputGroup.Prepend>
+                                &nbsp;&nbsp;&nbsp;
                             <InputGroup.Text>Countries</InputGroup.Text>
-                            <Multiselect
-                                style={{ searchBox: { backgroundColor: "#FFFFFF" } }}
-                                isObject={false}
-                                ref={this.countries}
-                                options={this.state.countryList}
-                                selectedValues={this.state.selectedCountries}
-                                placeholder="Type country name here"
-                            />
-                        </InputGroup.Prepend>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formHorizontalGraphParams">
-                        <Col lg="4">
-                            <ToggleButtonGroup id="infoTypeRadio" className="mb-2" type="radio" name="infoTypeRadio" defaultValue={2} onChange={this.OnInfoTypeChange}>
-                                <ToggleButton variant="outline-secondary" value={1}>Confirmed</ToggleButton>
-                                <ToggleButton variant="outline-secondary" value={2}>Deaths</ToggleButton>
-                                <ToggleButton variant="outline-secondary" value={3}>Recovered</ToggleButton>
-                            </ToggleButtonGroup>
-                        </Col>
-                        <Col lg="5">
-                            <ToggleButtonGroup id="addParamsCheckbox" className="mb-2" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange}>
-                                <ToggleButton variant="outline-secondary" value={1}>Log Scale</ToggleButton>
-                                <ToggleButton variant="outline-secondary" value={2}>By Population (in million)</ToggleButton>
-                            </ToggleButtonGroup>
-                        </Col>
-                        <Col lg="3">
-                            <Button type="reset" variant="outline-primary" style={{ marginRight: "15px" }}>Reset Countries</Button>
-                            <Button type="button" variant="primary" onClick={this.HandleReload}>Reload</Button>
-                        </Col>
-                    </Form.Group>
-                </Alert>
-            </Form >
+                                <Multiselect
+                                    style={{ searchBox: { backgroundColor: "#FFFFFF" } }}
+                                    isObject={false}
+                                    ref={this.countries}
+                                    options={this.state.countryList}
+                                    selectedValues={this.state.selectedCountries}
+                                    placeholder="Type country name here"
+                                />
+                            </InputGroup.Prepend>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formHorizontalGraphParams">
+                            <Col lg="4">
+                                <ToggleButtonGroup id="infoTypeRadio" className="mb-2" type="radio" name="infoTypeRadio" defaultValue={2} onChange={this.OnInfoTypeChange}>
+                                    <ToggleButton variant="outline-secondary" value={1}>Confirmed</ToggleButton>
+                                    <ToggleButton variant="outline-secondary" value={2}>Deaths</ToggleButton>
+                                    <ToggleButton variant="outline-secondary" value={3}>Recovered</ToggleButton>
+                                </ToggleButtonGroup>
+                            </Col>
+                            <Col lg="5">
+                                <ToggleButtonGroup id="addParamsCheckbox" className="mb-2" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange}>
+                                    <ToggleButton variant="outline-secondary" value={1}>Log Scale</ToggleButton>
+                                    <ToggleButton variant="outline-secondary" value={2}>By Population (in million)</ToggleButton>
+                                </ToggleButtonGroup>
+                            </Col>
+                            <Col lg="3">
+                                <Button type="reset" variant="outline-primary" style={{ marginRight: "15px" }}>Reset Countries</Button>
+                                <Button type="button" variant="primary" onClick={this.HandleReload}>Reload</Button>
+                            </Col>
+                        </Form.Group>
+                    </Alert>
+                </Form >
+            </Container>
         );
     }
 }
