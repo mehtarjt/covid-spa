@@ -67,9 +67,9 @@ class Filter extends React.Component {
             this.setParentState({ infoType: CONSTANTS.RECOVEREDMIL });
 
         if (addParam.includes(1))
-            this.setParentState({ graphLayout: { width: 1200, height: 800, yaxis: { type: "log" }, xaxis: { type: "date" } }, })
+            this.setParentState({ graphLayout: { autoresize: true, yaxis: { type: "log", fixedrange: true }, xaxis: { type: "date", fixedrange: true }, legend: { "orientation": "h" } }, })
         else
-            this.setParentState({ graphLayout: { width: 1200, height: 800, yaxis: { type: "linear" }, xaxis: { type: "date" } }, })
+            this.setParentState({ graphLayout: { autoresize: true, yaxis: { type: "linear", fixedrange: true }, xaxis: { type: "date", fixedrange: true }, legend: { "orientation": "h" } }, })
     }
 
     OnInfoTypeChange = (value) => {
@@ -112,14 +112,14 @@ class Filter extends React.Component {
                             <ToggleButton variant="outline-secondary" value={2}>Deaths</ToggleButton>
                             <ToggleButton variant="outline-secondary" value={3}>Recovered</ToggleButton>
                         </ToggleButtonGroup>
-                        <ToggleButtonGroup id="addParamsCheckbox" className="mb-2" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange} style={{ margin: "10px" }}>
+                        <ToggleButtonGroup id="addParamsCheckbox" className="mb-2" type="checkbox" name="addParamsCheckbox" defaultValue={[1]} onChange={this.OnAddParamChange} style={{ margin: "10px", marginLeft: "0px" }}>
                             <ToggleButton variant="outline-secondary" value={1}>Log Scale</ToggleButton>
                             <ToggleButton variant="outline-secondary" value={2}>By Population (in million)</ToggleButton>
                         </ToggleButtonGroup>
                     </Col>
                 </Row>
 
-            </Container>
+            </Container >
         );
     }
 }

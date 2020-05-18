@@ -13,7 +13,7 @@ class Graph extends React.Component {
             graphRawData: {},
             graphStructuredData: {},
             yAxisType: { type: "log" },
-            graphLayout: { width: 1200, height: 800, yaxis: { type: "log" }, xaxis: { type: "date" } },
+            graphLayout: { autoresize: true, yaxis: { type: "log", fixedrange: true }, xaxis: { type: "date", fixedrange: true }, legend: { "orientation": "h" } },
             graphConfig: { responsive: true },
             infoType: CONSTANTS.DEATHS,
             message: "",
@@ -68,20 +68,21 @@ class Graph extends React.Component {
     componentDidMount() {
         this.setState({ message: "Loading graph...", messageType: "info" })
         this.FetchGraph()
+        //Plot.resize(document.getElementById("plotDiv"))
     }
 
     render() {
         return (
-            <Container fluid>
-                <br />
+            <div className="full-height">
                 <Filter setParentState={this.SetParentState} />
                 <AlertPanel message={this.state.message} messageType={this.state.messageType} />
                 <Plot
+                    style={{ height: '100%', width: '100%' }}
                     data={this.state.graphStructuredData[this.state.infoType]}
                     layout={this.state.graphLayout}
                     config={this.state.graphConfig}
                 />
-            </Container >
+            </div>
         );
     }
 }
