@@ -1,2 +1,10 @@
 //export const BASE_URL = "https://covid-svc.herokuapp.com/"
 export const BASE_URL = "http://127.0.0.1:8000/"
+export const CONFIRMED = "Confirmed"
+export const DEATHS = "Deaths"
+export const RECOVERED = "Recovered"
+export const CONFIRMEDMIL = "Confirmed/mil"
+export const DEATHSMIL = "Deaths/mil"
+export const RECOVEREDMIL = "Recovered/mil"
+export const DATES = "Dates"
+export const INFOTYPES = ["Confirmed", "Deaths", "Recovered", "Confirmed/mil", "Deaths/mil", "Recovered/mil", "Dates"]
