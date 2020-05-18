@@ -51,7 +51,7 @@ class Graph extends React.Component {
                     result.push({
                         x: this.state.graphRawData[CONSTANTS.DATES],
                         y: this.state.graphRawData[key],
-                        name: key,
+                        name: key.replace(infoType, ""),
                         type: 'scatter',
                         mode: 'lines',
                     })
